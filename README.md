@@ -1,4 +1,5 @@
 # Homework Calculator
+## by Jakub (Kuba) Perlin
 
 This is a calculator accepting expressions formed with floating point numbers and the five operators:
 
