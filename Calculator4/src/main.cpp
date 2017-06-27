@@ -19,7 +19,7 @@ int main()
     {
         std::cout << t->toString() << " ";
     }
-    std::cout << t->toString() << " <- this should be END! " ;
+    std::cout << t->toString() << " <- this last one should be (END)! " ;
 
     getch();
     return 0;
