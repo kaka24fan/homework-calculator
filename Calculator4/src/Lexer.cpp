@@ -1,24 +1,10 @@
+#include "CharMethods.h"
+#include "Lexer.h"
+
 #include<string>   // std::string, std::to_string
 #include<iostream> // std::cerr
 #include<cstdlib>  // exit(int n)
 #include<conio.h>  // getch
-#include "CharMethods.h"
-
-class Token
-{
-public:
-    enum TokenName { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS, END };
-    TokenName getName() {return name;}
-    int getVal() {return val;}
-    Token(TokenName n, int v) {name = n; val = v;}
-    Token(TokenName n) {name = n; val = -1;}
-    std::string toString();
-
-private:
-    TokenName name;
-    int val;
-    std::string getEnumString(TokenName n);
-};
 
 std::string Token::toString()
 {
@@ -83,7 +69,7 @@ Lexer::Lexer(std::string s)
 
 void Lexer::fail (std::string msg)
 {
-    std::cerr << msg;
+    std::cerr << "LEXER ERROR: " << msg;
     getch();
     exit(-69);
 }

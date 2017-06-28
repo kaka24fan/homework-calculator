@@ -1,6 +1,4 @@
 #include<string>
-#ifndef CHARMETHODS_H_INCLUDED
-#define CHARMETHODS_H_INCLUDED
 
 class Token
 {
@@ -32,6 +30,3 @@ private:
     int next_index;
     char peek;
 };
-
-
-#endif // CHARMETHODS_H_INCLUDED

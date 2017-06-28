@@ -1,6 +1,17 @@
 #include "Parser.h"
 #include "ParseTree.h"
 
+#include<iostream> // std::cerr
+#include<cstdlib>  // exit(int n)
+#include<conio.h> // getch
+
+void Parser::fail(std::string msg)
+{
+	std::cerr << "PARSER ERROR: " << msg;
+	getch();
+	exit(-69);
+}
+
 Parser::Parser(Lexer* l)
 {
 	lexer = l;
@@ -13,15 +24,31 @@ Tree* Parser::parse() // page 251 in book
 	while (true)
 	{
 		int state = stateStack.top();
-		std::string act = action[state][sym.symbol];
-		if (act[0] == 's') // action is shift t
+		Action act = action[state][sym.symbol];
+		if (act.getType() == Action::ActionType::SHIFT) // action is shift t
 		{
-			int t = std::stoi(act.substr(1));
+			int t = act.getShiftState();
 			stateStack.push(t);
 			sym = readSymbol();
 		}
-		else if (act[0] == 'r') // TODO FIXME I really need to think this thru better!
-		{ }
+		else if (act.getType() == Action::ActionType::REDUCE) // TODO FIXME I really need to think this thru better!
+		{ 
+			Production p = act.getProduction();
+			int s = p.getBodySize();
+			for (int i = 0; i < s; i++)
+			{
+				stateStack.pop();
+			}
+			stateStack.push(go_to[state][p.getHead()]);
+		}
+		else if (act.getType() == Action::ActionType::ACCEPT) // TODO FIXME I really need to think this thru better!
+		{
+			break;
+		}
+		else // act.getType() == Action::ActionType::ERROR
+		{
+			fail("Action error");
+		}
 	}
 }
 
@@ -36,25 +63,25 @@ Parser::SymbolAndValue Parser::tokenToSymbol(Token* t)
 	switch (t->getName())
 	{
 	case Token::TokenName::LEFTPAREN:
-		return SymbolAndValue{ GrammarSymbol::LEFTPAREN, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::LEFTPAREN, 0, 0.0 };
 	case Token::TokenName::RIGHTPAREN:
-		return SymbolAndValue{ GrammarSymbol::RIGHTPAREN, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::RIGHTPAREN, 0, 0.0 };
 	case Token::TokenName::DOT:
-		return SymbolAndValue{ GrammarSymbol::DOT, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::DOT, 0, 0.0 };
 	case Token::TokenName::PLUS:
-		return SymbolAndValue{ GrammarSymbol::PLUS, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::PLUS, 0, 0.0 };
 	case Token::TokenName::MINUS:
-		return SymbolAndValue{ GrammarSymbol::MINUS, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::MINUS, 0, 0.0 };
 	case Token::TokenName::MUL:
-		return SymbolAndValue{ GrammarSymbol::MUL, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::MUL, 0, 0.0 };
 	case Token::TokenName::FAC:
-		return SymbolAndValue{ GrammarSymbol::FAC, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::FAC, 0, 0.0 };
 	case Token::TokenName::COS:
-		return SymbolAndValue{ GrammarSymbol::COS, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::COS, 0, 0.0 };
 	case Token::TokenName::END:
-		return SymbolAndValue{ GrammarSymbol::END, 0, 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::END, 0, 0.0 };
 	case Token::TokenName::NUM:
-		return SymbolAndValue{ GrammarSymbol::NUM, t->getVal(), 0.0 };
+		return SymbolAndValue{ Enums::GrammarSymbol::NUM, t->getVal(), 0.0 };
 	}
 }
 
