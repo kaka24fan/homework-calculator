@@ -8,7 +8,7 @@
 
 #define CALC_INPUT_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\calc_test_0.txt"
 
-void TestLexer()
+void testLexer()
 {
 	std::string input;
 	std::ifstream infile(CALC_INPUT_PATH);
