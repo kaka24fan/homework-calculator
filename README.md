@@ -7,8 +7,8 @@ This is a calculator accepting expressions formed with floating point numbers an
 - addition [left-associative]
 - subtraction [left-associative]
 - multiplication [left-associative]
-- factorial (for natural numbers only)
 - cosine
+- factorial (for natural numbers only)
 
 
 
