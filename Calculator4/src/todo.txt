@@ -1,0 +1,7 @@
+TODO:
+
+[ ] 01. Actually build the parse tree during parsing!
+[ ] 02. Build the action, go_to tables from grammar definition:
+    [ ] a) Lex the grammar definition.
+	[ ] b) Build the action table.
+	[ ] c) Build the go_to table.
