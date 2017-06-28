@@ -31,7 +31,7 @@ Tree* Parser::parse() // page 251 in book
 			stateStack.push(t);
 			sym = readSymbol();
 		}
-		else if (act.getType() == Action::ActionType::REDUCE) // TODO FIXME I really need to think this thru better!
+		else if (act.getType() == Action::ActionType::REDUCE) // action is reduce p
 		{ 
 			Production p = act.getProduction();
 			int s = p.getBodySize();
@@ -41,11 +41,11 @@ Tree* Parser::parse() // page 251 in book
 			}
 			stateStack.push(go_to[state][p.getHead()]);
 		}
-		else if (act.getType() == Action::ActionType::ACCEPT) // TODO FIXME I really need to think this thru better!
+		else if (act.getType() == Action::ActionType::ACCEPT) // action is accept
 		{
 			break;
 		}
-		else // act.getType() == Action::ActionType::ERROR
+		else // action is error
 		{
 			fail("Action error");
 		}
