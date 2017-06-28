@@ -43,21 +43,6 @@ std::string Token::getEnumString(TokenName n)
     }
 }
 
-class Lexer
-{
-public:
-    void putback(Token t);
-    Token* get();
-    Lexer(std::string s);
-private:
-    char readInChar();
-    void fail(std::string msg);
-    Token* last;
-    std::string source;
-    int next_index;
-    char peek;
-};
-
 Lexer::Lexer(std::string s)
 {
     source = s;
@@ -70,7 +55,7 @@ Lexer::Lexer(std::string s)
 void Lexer::fail (std::string msg)
 {
     std::cerr << "LEXER ERROR: " << msg;
-    getch();
+    _getch();
     exit(-69);
 }
 

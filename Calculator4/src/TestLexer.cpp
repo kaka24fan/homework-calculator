@@ -6,7 +6,7 @@
 #include <string>
 #include <fstream>
 
-#define CALC_INPUT_PATH "D:\UNIVERSITY\YEAR2\Summer Work\Calculator4\Calculator4\src\calc_test_0.txt"
+#define CALC_INPUT_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\calc_test_0.txt"
 
 void TestLexer()
 {

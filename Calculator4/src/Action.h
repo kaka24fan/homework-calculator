@@ -1,4 +1,6 @@
+#pragma once
 #include "Production.h"
+
 class Action
 {
 public:

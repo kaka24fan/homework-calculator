@@ -1,6 +1,8 @@
+#pragma once
 #include "Lexer.h"
 #include "Action.h"
 #include "Enums.h"
+#include "ParseTree.h"
 
 #include <stack>
 #include <vector>
@@ -10,24 +12,24 @@
 class Parser
 {
 public:
+	//this enum moved to Enums.h to avoid "#include" cycle with ParseTree
 	//enum GrammarSymbol { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS, END /* , nonterminals... */ };
 	Parser(Lexer* l);
 	Tree* parse();
-	struct SymbolAndValue // value only used for symbol NUM.
+	/*struct SymbolAndValue // value only used for symbol NUM.
 	{					  // these things will be grow on the parse tree
 		Enums::GrammarSymbol symbol;
 		int ivalue;
 		float fvalue;
-	};
+	};*/
 private:
 	Lexer* lexer;
-	std::stack<SymbolAndValue> symStack;
+	std::stack<Tree*> treeStack;
 	std::stack<int> stateStack;
-	void shift();
 	std::vector<int> num_values;
-	SymbolAndValue tokenToSymbol(Token* t);
+	Enums::SymbolAndValue tokenToSymbol(Token* t);
 	std::map< int, std::map< Enums::GrammarSymbol, Action > > action;
 	std::map< int, std::map< Enums::GrammarSymbol, int > > go_to;
-	SymbolAndValue readSymbol();
+	Enums::SymbolAndValue readSymbol();
 	void fail(std::string msg);
 };
