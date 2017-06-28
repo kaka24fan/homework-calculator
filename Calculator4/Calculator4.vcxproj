@@ -149,6 +149,7 @@
     <ClCompile Include="src\Lexer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\TestLexer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CharMethods.h" />
