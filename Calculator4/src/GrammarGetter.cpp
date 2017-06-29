@@ -12,7 +12,8 @@ std::vector<Production> getGrammar(std::string path)
 
 	while (std::getline(infile, line))
 	{
-		grammar.push_back(Production(line));
+		if (line.size > 0)
+			grammar.push_back(Production(line));
 	}
 
 	return grammar;

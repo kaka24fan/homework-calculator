@@ -18,12 +18,13 @@ Enums::GrammarSymbol Production::getHead()
 	return head;
 }
 
-Production Production::fromString(std::string s)
+Production::Production(std::string s)
 {
+	body.clear();
+
 	std::string buff = "";
-	std::vector<Enums::GrammarSymbol> body;
+	
 	char separator = ' ';
-	Enums::GrammarSymbol head;
 	bool assignedHead = false;
 
 	for (char c : s)
@@ -50,7 +51,12 @@ Production Production::fromString(std::string s)
 			head = stringToSymbol(buff);
 	}
 
-	return *new Production(body, head);
+	if (!assignedHead)
+	{
+		//error:
+		std::cerr << "Production constructor error: that"
+				  << " production didn't even assign head.\n";
+	}
 }
 
 
@@ -80,6 +86,23 @@ Enums::GrammarSymbol stringToSymbol(std::string s)
 		return Enums::GrammarSymbol::INT;
 	if (s == "FLOAT")
 		return Enums::GrammarSymbol::FLOAT;
+
+	if (s == "+")
+		return Enums::GrammarSymbol::PLUS;
+	if (s == "-")
+		return Enums::GrammarSymbol::MINUS;
+	if (s == "*")
+		return Enums::GrammarSymbol::MUL;
+	if (s == "!")
+		return Enums::GrammarSymbol::FAC;
+	if (s == "(")
+		return Enums::GrammarSymbol::LEFTPAREN;
+	if (s == ")")
+		return Enums::GrammarSymbol::RIGHTPAREN;
+	if (s == ".")
+		return Enums::GrammarSymbol::DOT;
+	if (s == "cos")
+		return Enums::GrammarSymbol::COS;
 
 	//error:
 	std::cerr << "Can't read that production.\n";

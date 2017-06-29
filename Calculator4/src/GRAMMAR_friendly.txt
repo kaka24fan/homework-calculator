@@ -1,0 +1,14 @@
+E     -> F | I
+
+F     -> F1 | F + F1 | F + I
+F1    -> F2 | F1 - F2 | F1 - I1
+F2    -> F3 | F2 * F3 | F2 * I2
+F3    -> FLOAT | ( F ) | cos F3 | cos I3
+
+I     -> I1 | I + I1
+I1    -> I2 | I1 - I2
+I2    -> I3 | I2 * I3
+I3    -> INT | ( I ) | I3 !
+
+FLOAT -> . num | num . | num . num 
+INT   -> num

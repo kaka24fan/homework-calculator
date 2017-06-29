@@ -10,7 +10,7 @@ public:
 	Production(std::vector<Enums::GrammarSymbol> b, Enums::GrammarSymbol h);
 	int getBodySize();
 	Enums::GrammarSymbol getHead();
-	Production fromString(std::string s);
+	Production(std::string s); // generates a production from 1-line text description
 private:
 	std::vector<Enums::GrammarSymbol> body;
 	Enums::GrammarSymbol head;
