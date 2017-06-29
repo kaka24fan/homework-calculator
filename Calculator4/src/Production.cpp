@@ -48,7 +48,10 @@ Production::Production(std::string s)
 		if (assignedHead)
 			body.push_back(stringToSymbol(buff));
 		else
+		{
 			head = stringToSymbol(buff);
+			assignedHead = true;
+		}
 	}
 
 	if (!assignedHead)
@@ -57,6 +60,11 @@ Production::Production(std::string s)
 		std::cerr << "Production constructor error: that"
 				  << " production didn't even assign head.\n";
 	}
+}
+
+std::vector<Enums::GrammarSymbol> Production::getBodyCopy()
+{
+	return body; // TODO make sure that gives a copy, not reference! I think it does...
 }
 
 
