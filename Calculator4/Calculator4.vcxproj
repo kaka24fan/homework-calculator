@@ -164,6 +164,7 @@
     <ClInclude Include="src\Parser.h" />
     <ClInclude Include="src\ParseTree.h" />
     <ClInclude Include="src\Production.h" />
+    <ClInclude Include="src\TestLexer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
