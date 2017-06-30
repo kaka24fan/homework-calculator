@@ -1,9 +1,16 @@
 #include "Grammar.h"
+#include "ItemSetOps.h"
 
 Grammar::Grammar(std::vector<Production> productions)
 {
 	this->productions = productions;
 	startSymbol = productions[0].getHead();
+
+	// extend the grammar - the S' -> S production is the last one now.
+	this->productions.push_back(Production(
+		std::vector<Enums::GrammarSymbol> {startSymbol},
+		Enums::GrammarSymbol::EXTENDED_START
+	));
 
 	// identify terminals:
 	for (Production p : productions)
@@ -47,6 +54,11 @@ std::set<Enums::GrammarSymbol> Grammar::getTerminals()
 std::set<Enums::GrammarSymbol> Grammar::getNonterminals()
 {
 	return nonterminals;
+}
+
+std::vector<Production> Grammar::getProductions()
+{
+	return productions;
 }
 
 void Grammar::buildFirst() // by the book, except we don't use epsilon in our grammars
@@ -112,4 +124,15 @@ void Grammar::buildFollow() // by the book, except we don't use epsilon in our g
 				didSomething = true;
 		}
 	}
+}
+
+std::set<Item> Grammar::goTo(std::set<Item> itemSet, Enums::GrammarSymbol sym)
+{
+	std::set<Item> res{};
+	for (Item it : itemSet)
+	{
+		if (it.isTheNextSymbolThis(sym))
+			res.insert(it.getAdvanced());
+	}
+	return getClosure(res);
 }

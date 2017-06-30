@@ -3,10 +3,12 @@
 #include "Production.h"
 #include "Action.h"
 #include "Grammar.h"
+#include "Item.h"
 
 #include<map>
 #include<vector>
 #include<string>
+#include<set>
 
 class ParseTableBuilder
 {
@@ -16,4 +18,6 @@ public:
 	std::map< int, std::map< Enums::GrammarSymbol, Action > > build_action();
 private:
 	Grammar grammar;
+	std::vector< std::set<Item> > LR0_items;
+	void construct_LR0_items();
 };

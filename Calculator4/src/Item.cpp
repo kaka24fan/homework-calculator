@@ -6,6 +6,11 @@ Item::Item(int pos, Production p)
 	production (p)
 { }
 
+Item Item::getAdvanced()
+{
+	return Item(dotPos + 1, production);
+}
+
 int Item::getDotPos()
 {
 	return dotPos;

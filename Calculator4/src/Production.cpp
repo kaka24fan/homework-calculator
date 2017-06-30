@@ -72,6 +72,8 @@ Enums::GrammarSymbol stringToSymbol(std::string s)
 {
 	if (s == "START" || s == "S")
 		return Enums::GrammarSymbol::START;
+	if (s == "EXTENDED_START")
+		return Enums::GrammarSymbol::EXTENDED_START;
 	if (s == "E")
 		return Enums::GrammarSymbol::E;
 	if (s == "F")
@@ -113,6 +115,6 @@ Enums::GrammarSymbol stringToSymbol(std::string s)
 		return Enums::GrammarSymbol::COS;
 
 	//error:
-	std::cerr << "Can't read that production.\n";
+	std::cerr << "Can't read that grammar symbol: \'" << s << "\'\n";
 	return Enums::GrammarSymbol::START;
 }

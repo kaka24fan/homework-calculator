@@ -12,7 +12,7 @@ namespace Enums
 
 	enum GrammarSymbol { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS,
 		START, E, F, I, F1, F2, F3, I1, I2, I3, INT, FLOAT,
-		END, EPSILON }; // END corresponds to $ sign in the book
+		END, EPSILON, EXTENDED_START }; // END corresponds to $ sign in the book
 
 	struct SymbolAndValue // value only used for symbol NUM.
 	{					  // these things will be grow on the parse tree
