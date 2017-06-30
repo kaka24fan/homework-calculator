@@ -39,6 +39,21 @@
     <ClCompile Include="src\Production.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ParseTableBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GrammarGetter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemSetOps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Grammar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CharMethods.h">
@@ -65,6 +80,21 @@
     <ClInclude Include="src\TestLexer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\ParseTableBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GrammarGetter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemSetOps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Grammar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\calc_test_0.txt">
@@ -74,6 +104,9 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="src\GRAMMAR.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="src\GRAMMAR_friendly.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

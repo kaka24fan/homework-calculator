@@ -1,7 +1,8 @@
 #pragma once
 #include "Enums.h"
 #include "Production.h"
+#include "Grammar.h"
 
 #include <string>
 
-std::vector< Production > getGrammar(std::string path);
+Grammar getGrammar(std::string path);

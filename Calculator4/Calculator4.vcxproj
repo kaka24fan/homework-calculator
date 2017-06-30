@@ -144,14 +144,20 @@
   <ItemGroup>
     <Text Include="src\calc_test_0.txt" />
     <Text Include="src\GRAMMAR.txt" />
+    <Text Include="src\GRAMMAR_friendly.txt" />
     <Text Include="src\todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Action.cpp" />
     <ClCompile Include="src\CharMethods.cpp" />
+    <ClCompile Include="src\Grammar.cpp" />
+    <ClCompile Include="src\GrammarGetter.cpp" />
+    <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemSetOps.cpp" />
     <ClCompile Include="src\Lexer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Parser.cpp" />
+    <ClCompile Include="src\ParseTableBuilder.cpp" />
     <ClCompile Include="src\ParseTree.cpp" />
     <ClCompile Include="src\Production.cpp" />
     <ClCompile Include="src\TestLexer.cpp" />
@@ -160,8 +166,13 @@
     <ClInclude Include="src\Action.h" />
     <ClInclude Include="src\CharMethods.h" />
     <ClInclude Include="src\Enums.h" />
+    <ClInclude Include="src\Grammar.h" />
+    <ClInclude Include="src\GrammarGetter.h" />
+    <ClInclude Include="src\Item.h" />
+    <ClInclude Include="src\ItemSetOps.h" />
     <ClInclude Include="src\Lexer.h" />
     <ClInclude Include="src\Parser.h" />
+    <ClInclude Include="src\ParseTableBuilder.h" />
     <ClInclude Include="src\ParseTree.h" />
     <ClInclude Include="src\Production.h" />
     <ClInclude Include="src\TestLexer.h" />

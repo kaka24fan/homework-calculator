@@ -13,7 +13,8 @@ public:
 	std::set<Enums::GrammarSymbol> followOf(Enums::GrammarSymbol sym);
 	std::set<Enums::GrammarSymbol> firstOf(Enums::GrammarSymbol sym);
 private:
-	std::set< Enums::GrammarSymbol> terminals; // needs to be populated in cons
+	std::set< Enums::GrammarSymbol> terminals; // populated in the constructor
+	std::set< Enums::GrammarSymbol> nonterminals; // populated in the constructor
 	std::map< Enums::GrammarSymbol, std::set<Enums::GrammarSymbol> > first;
 	std::map< Enums::GrammarSymbol, std::set<Enums::GrammarSymbol> > follow;
 	void buildFirst();
