@@ -58,7 +58,8 @@ void ParseTableBuilder::construct_LR0_items()
 	collection.push_back(
 		// S' -> S production is always the last one
 		getClosure(
-			std::set<Item> { Item(0, productions[productions.size() - 1]) }
+			std::set<Item> { Item(0, productions[productions.size() - 1]) },
+			grammar.getProductions()
 		)
 	);
 

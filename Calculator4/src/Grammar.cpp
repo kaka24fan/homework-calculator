@@ -134,5 +134,5 @@ std::set<Item> Grammar::goTo(std::set<Item> itemSet, Enums::GrammarSymbol sym)
 		if (it.isTheNextSymbolThis(sym))
 			res.insert(it.getAdvanced());
 	}
-	return getClosure(res);
+	return getClosure(res, productions);
 }

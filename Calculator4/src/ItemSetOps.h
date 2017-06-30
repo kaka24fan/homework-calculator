@@ -3,4 +3,4 @@
 
 #include<set>
 
-std::set<Item> getClosure(std::set<Item> s);
+std::set<Item> getClosure(std::set<Item> s, std::vector<Production> prods);
