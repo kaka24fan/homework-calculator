@@ -1,4 +1,5 @@
 #include "Lexer.h"
+#include "TestLexer.h"
 
 #include<iostream> // std::cin, std::cout
 #include<conio.h> // getch

@@ -12,6 +12,7 @@ public:
 	Production getProduction();
 	Enums::GrammarSymbol symbolAfterDot();
 	bool isTheNextSymbolThis(Enums::GrammarSymbol sym);
+	bool isItemOver();
 	inline bool operator< (const Item &i1) const
 	{
 		return (i1.dotPos != dotPos) || (i1.production < production);

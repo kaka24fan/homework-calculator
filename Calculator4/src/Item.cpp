@@ -38,3 +38,8 @@ bool Item::isTheNextSymbolThis(Enums::GrammarSymbol sym)
 {
 	return symbolAfterDot() == sym;
 }
+
+bool Item::isItemOver()
+{
+	return dotPos == production.getBodySize();
+}

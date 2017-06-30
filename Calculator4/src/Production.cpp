@@ -62,6 +62,10 @@ Production::Production(std::string s)
 	}
 }
 
+Production::Production()
+{
+}
+
 std::vector<Enums::GrammarSymbol> Production::getBodyCopy()
 {
 	return body; // TODO make sure that gives a copy, not reference! I think it does...

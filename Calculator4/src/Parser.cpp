@@ -1,8 +1,10 @@
 #include "Parser.h"
+#include "ParseTableBuilder.h"
 
 #include<iostream> // std::cerr
 #include<cstdlib>  // exit(int n)
 #include<conio.h> // getch
+
 
 void Parser::fail(std::string msg)
 {
@@ -11,10 +13,14 @@ void Parser::fail(std::string msg)
 	exit(-69);
 }
 
-Parser::Parser(Lexer* l)
+Parser::Parser(Lexer* l, std::string grammar_path)
 {
 	lexer = l;
 	stateStack.push(0);
+
+	ParseTableBuilder ptb = ParseTableBuilder(grammar_path);
+	action = ptb.build_action();
+	go_to = ptb.build_go_to();
 }
 
 Tree* Parser::parse() // page 251 in book

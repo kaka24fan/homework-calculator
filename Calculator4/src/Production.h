@@ -13,6 +13,7 @@ public:
 	int getBodySize();
 	Enums::GrammarSymbol getHead();
 	Production(std::string s); // generates a production from 1-line text description
+	Production(); // dummy production
 	std::vector<Enums::GrammarSymbol> getBodyCopy();
 
 	// we overload < to work as != for purposes of storing these in sets
