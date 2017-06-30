@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+Enums::GrammarSymbol stringToSymbol(std::string s);
+
 class Production
 {
 public:

@@ -12,7 +12,7 @@ Grammar getGrammar(std::string path)
 
 	while (std::getline(infile, line))
 	{
-		if (line.size > 0)
+		if (line.size() > 0)
 			productions.push_back(Production(line));
 	}
 
