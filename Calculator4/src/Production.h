@@ -19,16 +19,21 @@ public:
 	// we overload < to work as != for purposes of storing these in sets
 	inline bool operator < (const Production &p1) const
 	{
-		if (p1.head != head) return true;
-		if (p1.body.size() != body.size()) return true;
-		for (int i = 0; i < p1.body.size(); i++)
-			if (p1.body[i] != body[i]) return true;
-		return false;
+		if (head < p1.head) return true;
+		if (head > p1.head) return false;
+
+		for (int i = 0; i < p1.body.size() && i < body.size(); i++)
+		{
+			if (body[i] < p1.body[i]) return true;
+			if (body[i] > p1.body[i]) return false;
+		}
+
+		return (body.size() < p1.body.size()); // so false if they're equal
 	}	
 	
 	inline bool operator == (const Production &p1) const
 	{
-		return !(*this < p1);
+		return !(*this < p1) && !(p1 < *this);
 	}
 
 private:
