@@ -14,11 +14,14 @@ std::set<Item> getClosure(std::set<Item> s, std::vector<Production> prods)
 			for (Production p : prods)
 			{
 				if (p.getHead() == next)
+				{
 					toBeAdded.insert(Item(0, p));
+				}
 			}
 		}
 		if (toBeAdded.size() == 0)
 			break;
+
 		s.insert(toBeAdded.begin(), toBeAdded.end()); // insert all
 	}
 

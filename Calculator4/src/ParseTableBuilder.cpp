@@ -8,8 +8,6 @@ ParseTableBuilder::ParseTableBuilder(std::string grammar_path)
 {
 	// build the LR0 itemset collection:
 	construct_LR0_items();
-
-
 }
 
 //helper helper function:

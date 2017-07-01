@@ -8,7 +8,7 @@
 #define CALC_INPUT_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\calc_test_0.txt"
 #define GRAMMAR_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\GRAMMAR.txt"
 
-void TestParser()
+void testParser()
 {
 	std::string input;
 	std::ifstream infile(CALC_INPUT_PATH);
