@@ -19,10 +19,13 @@ std::set<Item> getClosure(std::set<Item> s, std::vector<Production> prods)
 				}
 			}
 		}
-		if (toBeAdded.size() == 0)
-			break;
+
+		int beforeInsertionSize = s.size();
 
 		s.insert(toBeAdded.begin(), toBeAdded.end()); // insert all
+
+		if (s.size() == beforeInsertionSize)
+			break; // nothing changed
 	}
 
 	return s;

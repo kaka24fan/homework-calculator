@@ -1,4 +1,4 @@
-﻿START E
+START E
 
 E F 
 E I

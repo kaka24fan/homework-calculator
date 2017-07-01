@@ -74,7 +74,7 @@ std::vector<Enums::GrammarSymbol> Production::getBodyCopy()
 
 Enums::GrammarSymbol stringToSymbol(std::string s)
 {
-	if (s == "START" || s == "S")
+	if (s == "START")
 		return Enums::GrammarSymbol::START;
 	if (s == "EXTENDED_START")
 		return Enums::GrammarSymbol::EXTENDED_START;
@@ -117,6 +117,8 @@ Enums::GrammarSymbol stringToSymbol(std::string s)
 		return Enums::GrammarSymbol::DOT;
 	if (s == "cos")
 		return Enums::GrammarSymbol::COS;
+	if (s == "num")
+		return Enums::GrammarSymbol::NUM;
 
 	//error:
 	std::cerr << "Can't read that grammar symbol: \'" << s << "\'\n";
