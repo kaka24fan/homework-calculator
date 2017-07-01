@@ -2,109 +2,6 @@
 
 #include <cmath> // cos
 
-Evaluation eval(Tree * t)
-{
-	Enums::SymbolAndValue node = t->getPayload();
-	float farg0, farg1, farg2;
-	int iarg0, iarg1, iarg2;
-	Evaluation arg0, arg1, arg2;
-
-	switch (node.symbol)
-	{
-
-	case Enums::GrammarSymbol::NUM: // LEAF CASE aka RECURSION BASE
-		return intEval(node.ivalue);
-
-	case Enums::GrammarSymbol::COS:
-		arg0 = eval(t->getChildren()[0]);
-		farg0 = arg0.fval;
-		return floatEval(cos(farg0));
-
-	case Enums::GrammarSymbol::FAC:
-		arg0 = eval(t->getChildren()[0]);
-		iarg0 = arg0.ival;
-		return intEval(factorial(iarg0));
-
-	case Enums::GrammarSymbol::PLUS:
-		arg0 = eval(t->getChildren()[0]);
-		arg2 = eval(t->getChildren()[2]);
-		if (arg0.itsAnInt)
-		{
-			iarg0 = arg0.ival;
-			iarg2 = arg2.ival;
-			return intEval(iarg0 + iarg2);
-		}
-		else
-		{
-			farg0 = arg0.fval;
-			farg2 = arg2.fval;
-			return floatEval(farg0 + farg2);
-		}
-
-	case Enums::GrammarSymbol::MUL:
-		arg0 = eval(t->getChildren()[0]);
-		arg2 = eval(t->getChildren()[2]);
-		if (arg0.itsAnInt)
-		{
-			iarg0 = arg0.ival;
-			iarg2 = arg2.ival;
-			return intEval(iarg0 * iarg2);
-		}
-		else
-		{
-			farg0 = arg0.fval;
-			farg2 = arg2.fval;
-			return intEval(farg0 * farg2);
-		}
-
-	case Enums::GrammarSymbol::MINUS:
-		arg0 = eval(t->getChildren()[0]);
-		arg2 = eval(t->getChildren()[2]);
-		if (arg0.itsAnInt)
-		{
-			iarg0 = arg0.ival;
-			iarg2 = arg2.ival;
-			return intEval(iarg0 - iarg2);
-		}
-		else
-		{
-			farg0 = arg0.fval;
-			farg2 = arg2.fval;
-			return intEval(farg0 - farg2);
-		}
-
-	case Enums::GrammarSymbol::INT:
-		arg0 = eval(t->getChildren()[0]);
-		return arg0;
-
-	case Enums::GrammarSymbol::FLOAT:
-		//case num.num
-		if (t->getChildren()[2]) // ...is not null
-		{
-			arg0 = eval(t->getChildren()[0]);
-			arg2 = eval(t->getChildren()[2]);
-			farg0 = arg0.fval;
-			farg2 = arg2.fval;
-			return floatEval(farg0 + toFraction(farg2));
-		}
-		//case num.
-		else if (t->getChildren()[1]->getPayload().symbol == Enums::GrammarSymbol::DOT)
-		{
-			arg0 = eval(t->getChildren()[0]);
-			farg0 = arg0.fval;
-			return floatEval(farg0);
-		}
-		//case .num
-		else
-		{
-			arg0 = eval(t->getChildren()[0]);
-			farg0 = arg0.fval;
-			return floatEval(toFraction(farg0));
-		}
-		
-	// keep going... case Enums::GrammarSymbol::
-	}
-}
 
 Evaluation floatEval(float f)
 {
@@ -130,4 +27,106 @@ int toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
 	while (f >= 1.0)
 		f /= 10.0;
 	return f;
+}
+
+Evaluation eval(Tree * t)
+{
+	Enums::SymbolAndValue node = t->getPayload();
+	Tree** children = t->getChildren();
+	Evaluation arg[3];
+	float farg[3];
+	int iarg[3];
+	for (int i = 0; i < 3; i++)
+	{
+		if (children[i])
+		{
+			arg[i] = eval(children[i]);
+			farg[i] = arg[i].fval;
+			iarg[i] = arg[i].ival;
+		}
+	}
+
+	switch (node.symbol)
+	{ // EXTENDED_START not needed here, right?
+
+	case Enums::GrammarSymbol::NUM: // LEAF CASE aka RECURSION BASE
+		return intEval(node.ivalue);
+
+	case Enums::GrammarSymbol::START:
+		return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::E:
+		return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::F:
+		if (children[1])
+			return floatEval(farg[0] + farg[2]);
+		else
+			return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::F1:
+		if (children[1])
+			return floatEval(farg[0] - farg[2]);
+		else
+			return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::F2:
+		if (children[1])
+			return floatEval(farg[0] * farg[2]);
+		else
+			return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::F3:
+		if (children[2]) // case ( F )
+			return floatEval(farg[1]);
+		else if (children[1]) // case cos F3 | cos I3
+			return floatEval(cos(farg[1]));
+		else // case FLOAT
+			return floatEval(farg[0]);
+
+	case Enums::GrammarSymbol::I:
+		if (children[1])
+			return intEval(iarg[0] + iarg[2]);
+		else
+			return intEval(iarg[0]);
+
+	case Enums::GrammarSymbol::I1:
+		if (children[1])
+			return intEval(iarg[0] - iarg[2]);
+		else
+			return intEval(iarg[0]);
+
+	case Enums::GrammarSymbol::I2:
+		if (children[1])
+			return intEval(iarg[0] * iarg[2]);
+		else
+			return intEval(iarg[0]);
+
+	case Enums::GrammarSymbol::I3:
+		if (children[2]) // case ( I )
+			return intEval(farg[1]);
+		else if (children[1]) // case I3 !
+			return intEval(factorial(iarg[0]));
+		else // case INT
+			return intEval(iarg[0]);
+
+	case Enums::GrammarSymbol::FLOAT:
+		//case num.num
+		if (children[2])
+			return floatEval(farg[0] + toFraction(farg[2]));
+		//case num.
+		else if (children[1]->getPayload().symbol == Enums::GrammarSymbol::DOT)
+			return floatEval(farg[0]);
+		//case .num
+		else
+			return floatEval(toFraction(farg[0]));
+		
+	case Enums::GrammarSymbol::INT:
+		return intEval(iarg[0]);
+	}
+}
+
+float final_eval(Tree *t)
+{
+	return eval(t).fval;
 }

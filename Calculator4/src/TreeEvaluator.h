@@ -9,4 +9,4 @@ struct Evaluation
 	bool itsAnInt;
 };
 
-Evaluation eval(Tree* t);
+float final_eval(Tree* t);

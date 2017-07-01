@@ -162,6 +162,7 @@
     <ClCompile Include="src\Production.cpp" />
     <ClCompile Include="src\TestLexer.cpp" />
     <ClCompile Include="src\TestParser.cpp" />
+    <ClCompile Include="src\TreeEvaluator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Action.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="src\Production.h" />
     <ClInclude Include="src\TestLexer.h" />
     <ClInclude Include="src\TestParser.h" />
+    <ClInclude Include="src\TreeEvaluator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
