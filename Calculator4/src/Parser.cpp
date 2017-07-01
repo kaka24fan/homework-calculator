@@ -9,6 +9,7 @@
 void Parser::fail(std::string msg)
 {
 	std::cerr << "PARSER ERROR: " << msg;
+	std::cerr << "\nPress a key to close console";
 	_getch();
 	exit(-69);
 }
@@ -70,7 +71,7 @@ Tree* Parser::parse() // page 251 in book
 		}
 		else // action is error
 		{
-			fail("Action error");
+			fail("Action read is ERROR");
 		}
 	}
 	return treeStack.top();

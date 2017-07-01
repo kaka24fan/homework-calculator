@@ -58,7 +58,8 @@ Production::Production(std::string s)
 	{
 		//error:
 		std::cerr << "Production constructor error: that"
-				  << " production didn't even assign head.\n";
+				  << " production didn't even assign head...\n"
+				  << "...The string was: " << s << " (length " << s.size() << ")\n";
 	}
 }
 
