@@ -9,7 +9,12 @@ ParseTableBuilder::ParseTableBuilder(std::string grammar_path)
 	// build the LR0 itemset collection:
 	construct_LR0_items();
 
-	std::cout << "\nLR0_items size: " << LR0_items.size();
+	std::cout << "\nLR0_items size: " << LR0_items.size() << "\n\n";
+	for (int i = 0; i < LR0_items.size(); i++)
+	{
+		std::cout << "LR0 itemset #" << i << ":\n";
+		std::cout << isetToString(LR0_items[i]) << "\n\n";
+	}
 }
 
 //helper helper function:

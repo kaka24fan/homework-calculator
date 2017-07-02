@@ -9,7 +9,7 @@ Item::Item(int pos, Production p)
 Item Item::getAdvanced()
 {
 	if (isItemOver())
-		std::cerr << "\nTrying to advance an item that's over...";
+		std::cerr << "\nTrying to advance an item that's over... (" << production.toString() << ")";
 	return Item(dotPos + 1, production);
 }
 
@@ -45,4 +45,19 @@ bool Item::isTheNextSymbolThis(Enums::GrammarSymbol sym)
 bool Item::isItemOver()
 {
 	return dotPos == production.getBodySize();
+}
+
+std::string Item::toString()
+{
+	std::string res = symbolToString(production.getHead()) + " -> ";
+	for (int i = 0; i < production.getBodyCopy().size(); i++) 
+	{
+		if (i == dotPos)
+			res += "@ ";
+		res += symbolToString(production.getBodyCopy()[i]) + " ";
+	}
+	if (dotPos == production.getBodyCopy().size())
+		res += "@";
+
+	return res;
 }

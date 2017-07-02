@@ -30,3 +30,16 @@ std::set<Item> getClosure(std::set<Item> s, std::vector<Production> prods)
 
 	return s;
 }
+
+std::string isetToString(std::set<Item> s)
+{
+	if (s.empty())
+		return "EMPTY_ITEM_SET";
+	std::string res = "";
+	for (Item it : s)
+	{
+		res += it.toString() + "\n";
+	}
+	res.erase(res.end() - 2, res.end());
+	return res;
+}

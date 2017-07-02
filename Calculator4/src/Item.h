@@ -31,6 +31,8 @@ public:
 		*/
 	}
 
+	std::string toString();
+
 private:
 	int dotPos;
 	Production production;

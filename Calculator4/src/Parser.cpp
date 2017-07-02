@@ -8,7 +8,7 @@
 
 void Parser::fail(std::string msg)
 {
-	std::cerr << "PARSER ERROR: " << msg;
+	std::cerr << "\nPARSER ERROR: " << msg;
 	std::cerr << "\nPress a key to close console";
 	_getch();
 	exit(-69);
@@ -63,7 +63,10 @@ Tree* Parser::parse() // page 251 in book
 			treeStack.push(t);
 			
 			//push the new state:
-			stateStack.push(go_to[state][p.getHead()]);
+			int new_state = go_to[stateStack.top()][p.getHead()];
+			if (new_state == -1) // error code
+				fail("The go_to table read a -1.");
+			stateStack.push(new_state);
 		}
 		else if (act.getType() == Action::ActionType::ACCEPT) // action is accept
 		{
