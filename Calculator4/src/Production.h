@@ -36,6 +36,7 @@ public:
 		return !(*this < p1) && !(p1 < *this);
 	}
 
+	std::string toString();
 private:
 	std::vector<Enums::GrammarSymbol> body;
 	Enums::GrammarSymbol head;

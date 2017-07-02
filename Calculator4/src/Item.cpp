@@ -8,6 +8,8 @@ Item::Item(int pos, Production p)
 
 Item Item::getAdvanced()
 {
+	if (isItemOver())
+		std::cerr << "\nTrying to advance an item that's over...";
 	return Item(dotPos + 1, production);
 }
 
@@ -29,7 +31,8 @@ Enums::GrammarSymbol Item::symbolAfterDot()
 		return production.getBodyCopy()[dotPos];
 	else
 	{
-		std::cerr << "Item error: Production body access out of bounds!\n";
+		std::cerr << "\nItem error: Production body access out of bounds!";
+		std::cerr << "\n" << production.toString() << " at pos " << dotPos;
 		return Enums::GrammarSymbol::START;
 	}
 }

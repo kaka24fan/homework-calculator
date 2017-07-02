@@ -72,6 +72,20 @@ std::vector<Enums::GrammarSymbol> Production::getBodyCopy()
 	return body; // TODO make sure that gives a copy, not reference! I think it does...
 }
 
+std::string symbolToString(Enums::GrammarSymbol sym)
+{
+	int index = sym;
+	char* lookup[24] = {"NUM", "LEFTPAREN", "RIGHTPAREN", "DOT", "PLUS", "MINUS", "MUL", "FAC", "COS", "START", "E", "F", "I", "F1", "F2", "F3", "I1", "I2", "I3", "INT", "FLOAT", "END", "EPSILON", "EXTENDED_START"};
+	return std::string(lookup[index]);
+}
+
+std::string Production::toString()
+{
+	std::string res = symbolToString(head) + " -> ";
+	for (Enums::GrammarSymbol sym : body)
+		res += symbolToString(sym) + " ";
+	return res;
+}
 
 Enums::GrammarSymbol stringToSymbol(std::string s)
 {

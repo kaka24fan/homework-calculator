@@ -8,6 +8,8 @@ ParseTableBuilder::ParseTableBuilder(std::string grammar_path)
 {
 	// build the LR0 itemset collection:
 	construct_LR0_items();
+
+	std::cout << "\nLR0_items size: " << LR0_items.size();
 }
 
 //helper helper function:
@@ -16,13 +18,13 @@ bool equal(std::set<Item> s1, std::set<Item> s2)
 	std::set<Item> s11 = s1;
 	for (Item i : s2)
 		s11.erase(i);
-	if (s11.empty())
+	if (!s11.empty())
 		return false;
 
 	std::set<Item> s22 = s2;
 	for (Item i : s1)
-		s2.erase(i);
-	if (s22.empty())
+		s22.erase(i);
+	if (!s22.empty())
 		return false;
 
 	return true;
@@ -43,13 +45,14 @@ bool contains(std::vector< std::set<Item> > collection, std::set<Item> iset)
 void ParseTableBuilder::construct_LR0_items()
 {
 	std::vector< std::set<Item> > collection;
+	std::vector< std::set<Item> > collection_buffer;
 	std::vector<Production> productions = grammar.getProductions();
 
 	collection.push_back(
 		// S' -> S production is always the last one
 		getClosure(
 			std::set<Item> { Item(0, productions[productions.size() - 1]) },
-			grammar.getProductions()
+			productions
 		)
 	);
 
@@ -57,6 +60,7 @@ void ParseTableBuilder::construct_LR0_items()
 	bool didSomething = true;
 	while (didSomething)
 	{
+		collection_buffer.clear();
 		didSomething = false;
 		for (std::set<Item> i : collection)
 		{
@@ -64,22 +68,26 @@ void ParseTableBuilder::construct_LR0_items()
 			for (Enums::GrammarSymbol sym : grammar.getTerminals())
 			{
 				std::set<Item> itemset = grammar.goTo(i, sym);
-				if (!itemset.empty() && !contains(collection, itemset))
+				std::cout << " " << itemset.empty() << contains(collection, itemset); // DEBUG
+				if (!itemset.empty() && !contains(collection, itemset) && !contains(collection_buffer, itemset))
 				{
 					didSomething = true;
-					collection.push_back(itemset);
+					collection_buffer.push_back(itemset);
 				}
 			}
 			for (Enums::GrammarSymbol sym : grammar.getNonterminals())
 			{
 				std::set<Item> itemset = grammar.goTo(i, sym);
-				if (!itemset.empty() && !contains(collection, itemset))
+				std::cout << " " << itemset.empty() << contains(collection, itemset); // DEBUG
+				if (!itemset.empty() && !contains(collection, itemset) && !contains(collection_buffer, itemset))
 				{
 					didSomething = true;
-					collection.push_back(itemset);
+					collection_buffer.push_back(itemset);
 				}
 			}
 		}
+		for (auto x : collection_buffer)
+			collection.push_back(x);
 	}
 
 	LR0_items = collection;

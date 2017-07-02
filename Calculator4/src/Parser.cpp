@@ -106,5 +106,8 @@ Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
 
 Enums::SymbolAndValue Parser::readSymbol()
 {
-	return tokenToSymbol(lexer->get());
+	Token* t = lexer->get();
+	std::cout << "\nToken: " << t->toString();
+	return tokenToSymbol(t);
+	//return tokenToSymbol(lexer->get());
 }
