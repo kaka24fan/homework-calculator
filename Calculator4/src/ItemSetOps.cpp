@@ -40,6 +40,6 @@ std::string isetToString(std::set<Item> s)
 	{
 		res += it.toString() + "\n";
 	}
-	res.erase(res.end() - 2, res.end());
+	res.erase(res.end() - 1, res.end());
 	return res;
 }

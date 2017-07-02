@@ -56,8 +56,14 @@ std::string Item::toString()
 			res += "@ ";
 		res += symbolToString(production.getBodyCopy()[i]) + " ";
 	}
+
 	if (dotPos == production.getBodyCopy().size())
 		res += "@";
+
+	if (dotPos > production.getBodyCopy().size())
+		res += "[invalid item with dotPos = " + std::to_string(dotPos) + "]";
+
+	//res += "  {dotPos=" + std::to_string(dotPos) + "}";
 
 	return res;
 }

@@ -119,6 +119,9 @@ std::map<int, std::map<Enums::GrammarSymbol, Action>> ParseTableBuilder::build_a
 	{
 		for (Item it : LR0_items[i])
 		{
+			if (it.isItemOver())
+				continue;
+
 			Enums::GrammarSymbol nextSym = it.symbolAfterDot();
 
 			// if we already went thru this transition, continue
