@@ -33,11 +33,15 @@ Evaluation eval(Tree* t)
 {
 	Enums::SymbolAndValue node = t->getPayload();
 	Tree** children = t->getChildren();
-	Evaluation arg[3];
+	Evaluation arg[3]; // 3 is guaranteed to be the size of children
 	float farg[3];
 	int iarg[3];
+	std::cout << "\nsymbol: " << Enums::symbolToString(node.symbol);
 	for (int i = 0; i < 3; i++)
 	{
+		// error: local children seems to have different contents 
+		// than the children in t
+		std::cout << "\nchild #" << i << ": " << children[i];
 		if (children[i])
 		{
 			arg[i] = eval(children[i]);
@@ -123,6 +127,20 @@ Evaluation eval(Tree* t)
 		
 	case Enums::GrammarSymbol::INT:
 		return intEval(iarg[0]);
+
+	default:
+		/*
+		This dummy evaluation will never be used, 
+		it is here for cases such as LEFTPAREN
+		because we evaluate all children before we look at
+		what production we have
+		For example for node I3 with children ( I ), we evalute LEFTPAREN
+		and then don't look at the meaningless result.
+
+		The programmer has to program the cases above correctly and avoid using
+		the dummy!
+		*/
+		return Evaluation{ 0, 0, 0 };
 	}
 }
 

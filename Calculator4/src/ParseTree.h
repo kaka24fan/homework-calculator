@@ -12,7 +12,6 @@ public:
 	Tree(Enums::SymbolAndValue p, Tree* first, Tree* second, Tree* third);
 	void addChild(Tree* child);
 private:
-	Tree* children[3]; // Number 3 dictated by the grammar I intend to use
-	                   // It's equal to max production-body length
+	Tree** children; // to have length 3
 	Enums::SymbolAndValue payload;
 };

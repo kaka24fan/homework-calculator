@@ -17,5 +17,6 @@ int main()
 	std::cout << "\n\nPARSER SAYS:\n\n";
 	testParser();
 
-    return 0;
+	_getch();
+	return 0;
 }

@@ -4,6 +4,7 @@
 
 Tree::Tree(Enums::SymbolAndValue p)
 {
+	children = new Tree* [3];
 	payload = p;
 	children[0] = nullptr;
 	children[1] = nullptr;
@@ -12,6 +13,7 @@ Tree::Tree(Enums::SymbolAndValue p)
 
 Tree::Tree(Enums::SymbolAndValue p, Tree* first)
 {
+	children = new Tree*[3];
 	payload = p;
 	children[0] = first;
 	children[1] = nullptr;
@@ -20,6 +22,7 @@ Tree::Tree(Enums::SymbolAndValue p, Tree* first)
 
 Tree::Tree(Enums::SymbolAndValue p, Tree* first, Tree* second)
 {
+	children = new Tree*[3];
 	payload = p;
 	children[0] = first;
 	children[1] = second;
@@ -28,6 +31,7 @@ Tree::Tree(Enums::SymbolAndValue p, Tree* first, Tree* second)
 
 Tree::Tree(Enums::SymbolAndValue p, Tree* first, Tree* second, Tree* third)
 {
+	children = new Tree*[3];
 	payload = p;
 	children[0] = first;
 	children[1] = second;
