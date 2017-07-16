@@ -29,7 +29,7 @@ int toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
 	return f;
 }
 
-Evaluation eval(Tree * t)
+Evaluation eval(Tree* t)
 {
 	Enums::SymbolAndValue node = t->getPayload();
 	Tree** children = t->getChildren();

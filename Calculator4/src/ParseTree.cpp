@@ -42,8 +42,9 @@ void Tree::addChild(Tree* child)
 		children[1] = child;
 	else if (!children[2])
 		children[2] = child;
-	std::cerr << "Can't add more children to tree node!\n";
-	// else error
+	else
+		// else error
+		std::cerr << "Can't add more children to tree node!\n";
 }
 
 Tree** Tree::getChildren()
