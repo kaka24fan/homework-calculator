@@ -36,12 +36,9 @@ Evaluation eval(Tree* t)
 	Evaluation arg[3]; // 3 is guaranteed to be the size of children
 	float farg[3];
 	int iarg[3];
-	std::cout << "\nsymbol: " << Enums::symbolToString(node.symbol);
+
 	for (int i = 0; i < 3; i++)
 	{
-		// error: local children seems to have different contents 
-		// than the children in t
-		std::cout << "\nchild #" << i << ": " << children[i];
 		if (children[i])
 		{
 			arg[i] = eval(children[i]);

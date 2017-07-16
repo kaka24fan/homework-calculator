@@ -83,7 +83,4 @@ namespace Enums
 		std::cerr << "Can't read that grammar symbol: \'" << s << "\'\n";
 		return Enums::GrammarSymbol::START;
 	}
-
-	//enum TokenName { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS, END };
-	//enum ActionType { ERROR, SHIFT, REDUCE, ACCEPT };
 }
