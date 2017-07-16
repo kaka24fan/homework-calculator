@@ -125,7 +125,7 @@ std::map<int, std::map<Enums::GrammarSymbol, Action>> ParseTableBuilder::build_a
 			Enums::GrammarSymbol nextSym = it.symbolAfterDot();
 
 			// if we already went thru this transition, continue
-			if (result[i].count(nextSym))
+			if (result[i][nextSym].getType() != Action::ActionType::ERROR)
 				continue;
 
 			std::set<Item> destination = grammar.goTo(LR0_items[i], nextSym);

@@ -43,6 +43,7 @@ Tree* Parser::parse() // page 251 in book
 		{ 
 			Production p = act.getProduction();
 			int s = p.getBodySize();
+			std::cout << s << std::endl; // DEBUG
 			std::stack<Tree*> children; // used to build the tree node
 			for (int i = 0; i < s; i++)
 			{
@@ -52,7 +53,9 @@ Tree* Parser::parse() // page 251 in book
 			}
 			
 			//build tree node:
-			Tree* t = new Tree(sym);
+			Tree* t = new Tree(
+				Enums::SymbolAndValue{ p.getHead(), 0, 0.0 }
+				);
 			while (!children.empty())
 			{
 				t->addChild(children.top());
