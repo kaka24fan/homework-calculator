@@ -16,7 +16,7 @@ Evaluation intEval(int i)
 int factorial(int i)
 {
 	int r = 1;
-	for (int j = 1; j < i; j++)
+	for (int j = 2; j <= i; j++)
 		r *= j;
 	return r;
 }

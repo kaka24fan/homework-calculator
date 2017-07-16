@@ -15,12 +15,12 @@ void testParser()
 	std::getline(infile, input); // read in 1st line of the text file
 
 	Lexer* lexer = new Lexer(input);
-	Parser parser = Parser(lexer, GRAMMAR_PATH);
+	Parser parser = Parser(GRAMMAR_PATH);
 
-	Tree* parseTree = parser.parse();
+	Tree* parseTree = parser.parse(lexer);
 
-	// printing the tree would be a good idea...
+	// TODO: Print the parse tree
 	float result = final_eval(parseTree);
 
-	std::cout << "RESULT: " << result << std::endl;
+	std::cout << "\nRESULT: " << result << std::endl;
 }

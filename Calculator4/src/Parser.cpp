@@ -14,9 +14,8 @@ void Parser::fail(std::string msg)
 	exit(-69);
 }
 
-Parser::Parser(Lexer* l, std::string grammar_path)
+Parser::Parser(std::string grammar_path)
 {
-	lexer = l;
 	stateStack.push(0);
 
 	ParseTableBuilder ptb = ParseTableBuilder(grammar_path);
@@ -24,9 +23,9 @@ Parser::Parser(Lexer* l, std::string grammar_path)
 	go_to = ptb.build_go_to();
 }
 
-Tree* Parser::parse() // page 251 in book
+Tree* Parser::parse(Lexer* l) // page 251 in book
 {
-	Enums::SymbolAndValue sym = readSymbol();
+	Enums::SymbolAndValue sym = readSymbol(l);
 	while (true)
 	{
 		int state = stateStack.top();
@@ -37,7 +36,7 @@ Tree* Parser::parse() // page 251 in book
 			int t = act.getShiftState();
 			treeStack.push(new Tree(sym));
 			stateStack.push(t);
-			sym = readSymbol();
+			sym = readSymbol(l);
 		}
 		else if (act.getType() == Action::ActionType::REDUCE) // action is reduce p
 		{ 
@@ -83,6 +82,13 @@ Tree* Parser::parse() // page 251 in book
 	return treeStack.top();
 }
 
+void Parser::restart()
+{
+	treeStack = std::stack<Tree*> ();
+	stateStack = std::stack<int> ();
+	stateStack.push(0);
+}
+
 Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
 {
 	switch (t->getName())
@@ -110,10 +116,7 @@ Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
 	}
 }
 
-Enums::SymbolAndValue Parser::readSymbol()
+Enums::SymbolAndValue Parser::readSymbol(Lexer* l)
 {
-	Token* t = lexer->get();
-	std::cout << "\nToken: " << t->toString();
-	return tokenToSymbol(t);
-	//return tokenToSymbol(lexer->get());
+	return tokenToSymbol(l->get());
 }

@@ -6,3 +6,4 @@ TODO:
 	[x] b) Build the action table.
 	[x] c) Build the go_to table.
 [ ] 03. Let the calculator process multiple lines in one go (execution).
+[ ] 04. Print the parse trees pretty.
