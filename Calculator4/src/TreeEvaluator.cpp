@@ -21,7 +21,7 @@ int factorial(int i)
 	return r;
 }
 
-int toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
+float toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
 {
 	float f = (float)t;
 	while (f >= 1.0)
