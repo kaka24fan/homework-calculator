@@ -2,7 +2,6 @@
 #include "TestLexer.h"
 
 #include<iostream> // std::cin, std::cout
-#include<conio.h> // getch
 
 #include <string>
 #include <fstream>
@@ -21,7 +20,5 @@ void testLexer()
 	{
 		std::cout << t->toString() << " ";
 	}
-	std::cout << t->toString() << " <- this last one should be (END)! ";
-
-	getch();
+	std::cout << t->toString() << " <- this last one should be (END)!\n";
 }

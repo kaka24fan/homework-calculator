@@ -34,10 +34,10 @@ Production::Production(std::string s)
 		else if (c == separator && buff != "") 
 		{ 
 			if (assignedHead)
-				body.push_back(stringToSymbol(buff));
+				body.push_back(Enums::stringToSymbol(buff));
 			else
 			{
-				head = stringToSymbol(buff);
+				head = Enums::stringToSymbol(buff);
 				assignedHead = true;
 			}
 			buff = "";
@@ -46,10 +46,10 @@ Production::Production(std::string s)
 	if (buff != "")
 	{
 		if (assignedHead)
-			body.push_back(stringToSymbol(buff));
+			body.push_back(Enums::stringToSymbol(buff));
 		else
 		{
-			head = stringToSymbol(buff);
+			head = Enums::stringToSymbol(buff);
 			assignedHead = true;
 		}
 	}
@@ -58,7 +58,8 @@ Production::Production(std::string s)
 	{
 		//error:
 		std::cerr << "Production constructor error: that"
-				  << " production didn't even assign head.\n";
+				  << " production didn't even assign head...\n"
+				  << "...The string was: " << s << " (length " << s.size() << ")\n";
 	}
 }
 
@@ -71,54 +72,10 @@ std::vector<Enums::GrammarSymbol> Production::getBodyCopy()
 	return body; // TODO make sure that gives a copy, not reference! I think it does...
 }
 
-
-Enums::GrammarSymbol stringToSymbol(std::string s)
+std::string Production::toString()
 {
-	if (s == "START" || s == "S")
-		return Enums::GrammarSymbol::START;
-	if (s == "EXTENDED_START")
-		return Enums::GrammarSymbol::EXTENDED_START;
-	if (s == "E")
-		return Enums::GrammarSymbol::E;
-	if (s == "F")
-		return Enums::GrammarSymbol::F;
-	if (s == "F1")
-		return Enums::GrammarSymbol::F1;
-	if (s == "F2")
-		return Enums::GrammarSymbol::F2;
-	if (s == "F3")
-		return Enums::GrammarSymbol::F3;
-	if(s == "I")
-		return Enums::GrammarSymbol::I;
-	if(s == "I1")
-		return Enums::GrammarSymbol::I1;
-	if(s == "I2")
-		return Enums::GrammarSymbol::I2;
-	if (s == "I3")
-		return Enums::GrammarSymbol::I3;
-	if (s == "INT")
-		return Enums::GrammarSymbol::INT;
-	if (s == "FLOAT")
-		return Enums::GrammarSymbol::FLOAT;
-
-	if (s == "+")
-		return Enums::GrammarSymbol::PLUS;
-	if (s == "-")
-		return Enums::GrammarSymbol::MINUS;
-	if (s == "*")
-		return Enums::GrammarSymbol::MUL;
-	if (s == "!")
-		return Enums::GrammarSymbol::FAC;
-	if (s == "(")
-		return Enums::GrammarSymbol::LEFTPAREN;
-	if (s == ")")
-		return Enums::GrammarSymbol::RIGHTPAREN;
-	if (s == ".")
-		return Enums::GrammarSymbol::DOT;
-	if (s == "cos")
-		return Enums::GrammarSymbol::COS;
-
-	//error:
-	std::cerr << "Can't read that grammar symbol: \'" << s << "\'\n";
-	return Enums::GrammarSymbol::START;
+	std::string res = Enums::symbolToString(head) + " -> ";
+	for (Enums::GrammarSymbol sym : body)
+		res += Enums::symbolToString(sym) + " ";
+	return res;
 }

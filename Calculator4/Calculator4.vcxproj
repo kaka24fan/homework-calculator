@@ -142,7 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="src\calc_test_0.txt" />
+    <Text Include="src\GRAMMAR2.txt" />
+    <Text Include="src\input.txt" />
     <Text Include="src\GRAMMAR.txt" />
     <Text Include="src\GRAMMAR_friendly.txt" />
     <Text Include="src\todo.txt" />

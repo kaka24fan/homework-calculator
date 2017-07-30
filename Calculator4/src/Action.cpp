@@ -10,7 +10,7 @@ Action::Action(ActionType type, int val_shift, Production val_reduce)
 
 Action::Action() // default constructor, not gonna be used
 	:
-	val_reduce("")
+	val_reduce(Production())
 {
 	type = ActionType::ERROR;
 	val_shift = 0;

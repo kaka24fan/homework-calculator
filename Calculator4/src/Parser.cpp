@@ -8,14 +8,11 @@
 
 void Parser::fail(std::string msg)
 {
-	std::cerr << "PARSER ERROR: " << msg;
-	_getch();
-	exit(-69);
+	throw std::exception(("\nPARSER ERROR: " + msg).c_str());
 }
 
-Parser::Parser(Lexer* l, std::string grammar_path)
+Parser::Parser(std::string grammar_path)
 {
-	lexer = l;
 	stateStack.push(0);
 
 	ParseTableBuilder ptb = ParseTableBuilder(grammar_path);
@@ -23,9 +20,9 @@ Parser::Parser(Lexer* l, std::string grammar_path)
 	go_to = ptb.build_go_to();
 }
 
-Tree* Parser::parse() // page 251 in book
+Tree* Parser::parse(Lexer* l) // page 251 in book
 {
-	Enums::SymbolAndValue sym = readSymbol();
+	Enums::SymbolAndValue sym = readSymbol(l);
 	while (true)
 	{
 		int state = stateStack.top();
@@ -36,13 +33,16 @@ Tree* Parser::parse() // page 251 in book
 			int t = act.getShiftState();
 			treeStack.push(new Tree(sym));
 			stateStack.push(t);
-			sym = readSymbol();
+			sym = readSymbol(l);
 		}
 		else if (act.getType() == Action::ActionType::REDUCE) // action is reduce p
 		{ 
 			Production p = act.getProduction();
+
+			std::cout << "Using " << p.toString() << "\n";
+
 			int s = p.getBodySize();
-			std::stack<Tree*> children; // used to build the tree node
+			std::stack<Tree*> children; // used temp-ly to build the tree node
 			for (int i = 0; i < s; i++)
 			{
 				children.push( treeStack.top() );
@@ -51,7 +51,10 @@ Tree* Parser::parse() // page 251 in book
 			}
 			
 			//build tree node:
-			Tree* t = new Tree(sym);
+			Tree* t = new Tree(
+				Enums::SymbolAndValue{ p.getHead(), 0, 0.0 }
+				);
+
 			while (!children.empty())
 			{
 				t->addChild(children.top());
@@ -62,7 +65,10 @@ Tree* Parser::parse() // page 251 in book
 			treeStack.push(t);
 			
 			//push the new state:
-			stateStack.push(go_to[state][p.getHead()]);
+			int new_state = go_to[stateStack.top()][p.getHead()];
+			if (new_state == -1) // error code
+				fail("The go_to table read a -1.");
+			stateStack.push(new_state);
 		}
 		else if (act.getType() == Action::ActionType::ACCEPT) // action is accept
 		{
@@ -70,10 +76,17 @@ Tree* Parser::parse() // page 251 in book
 		}
 		else // action is error
 		{
-			fail("Action error");
+			fail("Action read is ERROR");
 		}
 	}
 	return treeStack.top();
+}
+
+void Parser::restart()
+{
+	treeStack = std::stack<Tree*> ();
+	stateStack = std::stack<int> ();
+	stateStack.push(0);
 }
 
 Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
@@ -103,7 +116,7 @@ Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
 	}
 }
 
-Enums::SymbolAndValue Parser::readSymbol()
+Enums::SymbolAndValue Parser::readSymbol(Lexer* l)
 {
-	return tokenToSymbol(lexer->get());
+	return tokenToSymbol(l->get());
 }

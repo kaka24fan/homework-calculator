@@ -8,19 +8,19 @@
 #define CALC_INPUT_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\calc_test_0.txt"
 #define GRAMMAR_PATH "D:\\UNIVERSITY\\YEAR2\\Summer Work\\Calculator4\\Calculator4\\src\\GRAMMAR.txt"
 
-void TestParser()
+void testParser()
 {
 	std::string input;
 	std::ifstream infile(CALC_INPUT_PATH);
 	std::getline(infile, input); // read in 1st line of the text file
 
 	Lexer* lexer = new Lexer(input);
-	Parser parser = Parser(lexer, GRAMMAR_PATH);
+	Parser parser = Parser(GRAMMAR_PATH);
 
-	Tree* parseTree = parser.parse();
+	Tree* parseTree = parser.parse(lexer);
 
-	// printing the tree would be a good idea...
+	// TODO: Print the parse tree
 	float result = final_eval(parseTree);
 
-	std::cout << "RESULT: " << result << std::endl;
+	std::cout << "\nRESULT: " << result << std::endl;
 }

@@ -109,9 +109,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\calc_test_0.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="src\todo.txt">
       <Filter>Resource Files</Filter>
     </Text>
@@ -119,6 +116,12 @@
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="src\GRAMMAR_friendly.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="src\input.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="src\GRAMMAR2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

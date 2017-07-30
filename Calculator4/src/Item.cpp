@@ -8,6 +8,8 @@ Item::Item(int pos, Production p)
 
 Item Item::getAdvanced()
 {
+	if (isItemOver())
+		std::cerr << "\nTrying to advance an item that's over... (" << production.toString() << ")";
 	return Item(dotPos + 1, production);
 }
 
@@ -29,7 +31,8 @@ Enums::GrammarSymbol Item::symbolAfterDot()
 		return production.getBodyCopy()[dotPos];
 	else
 	{
-		std::cerr << "Item error: Production body access out of bounds!\n";
+		std::cerr << "\nItem error: Production body access out of bounds!";
+		std::cerr << "\n" << production.toString() << " at pos " << dotPos;
 		return Enums::GrammarSymbol::START;
 	}
 }
@@ -42,4 +45,25 @@ bool Item::isTheNextSymbolThis(Enums::GrammarSymbol sym)
 bool Item::isItemOver()
 {
 	return dotPos == production.getBodySize();
+}
+
+std::string Item::toString()
+{
+	std::string res = symbolToString(production.getHead()) + " -> ";
+	for (int i = 0; i < production.getBodyCopy().size(); i++) 
+	{
+		if (i == dotPos)
+			res += "@ ";
+		res += symbolToString(production.getBodyCopy()[i]) + " ";
+	}
+
+	if (dotPos == production.getBodyCopy().size())
+		res += "@";
+
+	if (dotPos > production.getBodyCopy().size())
+		res += "[invalid item with dotPos = " + std::to_string(dotPos) + "]";
+
+	//res += "  {dotPos=" + std::to_string(dotPos) + "}";
+
+	return res;
 }

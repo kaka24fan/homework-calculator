@@ -115,12 +115,12 @@ void Grammar::buildFollow() // by the book, except we don't use epsilon in our g
 		for (Production p : productions)
 		{
 			Enums::GrammarSymbol last = p.getBodyCopy()[p.getBodySize() - 1];
-			int sizeBefore = first[last].size();
-			first[last].insert(
-				first[p.getHead()].begin(),
-				first[p.getHead()].end()
+			int sizeBefore = follow[last].size();
+			follow[last].insert(
+				follow[p.getHead()].begin(),
+				follow[p.getHead()].end()
 			);
-			if (first[last].size() > sizeBefore)
+			if (follow[last].size() > sizeBefore)
 				didSomething = true;
 		}
 	}
