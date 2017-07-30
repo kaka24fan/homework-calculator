@@ -23,17 +23,49 @@ int main()
 		if (line.at(0) == '#')
 			continue;
 
-		parser.restart();
+		try
+		{
+			parser.restart();
 
-		Lexer *lexer = new Lexer(line);
+			Lexer *lexer = new Lexer(line);
 
-		Tree* parseTree = parser.parse(lexer);
+			Tree* parseTree = parser.parse(lexer);
 
-		// print tree here
+			// print tree here
 
-		float result = final_eval(parseTree);
+			float result = final_eval(parseTree);
 
-		std::cout << "\n" << line << " = " << result;
+			std::cout << "\n" << line << " = " << result;
+		}
+		catch (const std::exception& e)
+		{
+
+		}
+	}
+
+	while (std::cin >> line)
+	{
+		if (line.at(0) == 'q')
+			break;
+
+		try
+		{
+			parser.restart();
+
+			Lexer *lexer = new Lexer(line);
+
+			Tree* parseTree = parser.parse(lexer);
+
+			// print tree here
+
+			float result = final_eval(parseTree);
+
+			std::cout << "\n" << line << " = " << result;
+		}
+		catch (const std::exception& e)
+		{
+
+		}
 	}
 
 	_getch();

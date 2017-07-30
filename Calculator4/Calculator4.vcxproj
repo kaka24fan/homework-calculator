@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="src\GRAMMAR2.txt" />
     <Text Include="src\input.txt" />
     <Text Include="src\GRAMMAR.txt" />
     <Text Include="src\GRAMMAR_friendly.txt" />

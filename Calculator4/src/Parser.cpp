@@ -8,10 +8,11 @@
 
 void Parser::fail(std::string msg)
 {
-	std::cerr << "\nPARSER ERROR: " << msg;
-	std::cerr << "\nPress a key to close console";
-	_getch();
-	exit(-69);
+	std::cerr << "\nPARSER ERROR: " << msg << "\n";
+	throw std::exception();
+	//std::cerr << "\nPress a key to close console";
+	//_getch();
+	//exit(-69);
 }
 
 Parser::Parser(std::string grammar_path)
