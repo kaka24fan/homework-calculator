@@ -47,7 +47,10 @@ int main()
 		}
 	}
 
-	while (std::cin >> line)
+	std::cout << "\nYou can input extra lines now, if you wish!\n";
+	std::cout << "Close the console with \"q\"\n\n";
+
+	while (std::getline(std::cin, line))
 	{
 		if (line.at(0) == 'q')
 			break;

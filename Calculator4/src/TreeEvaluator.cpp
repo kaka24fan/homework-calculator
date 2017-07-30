@@ -23,7 +23,6 @@ float toFraction(int t) // takes t and divides it by 10 until it's smaller than 
 
 int factorial(int i)
 {
-	std::cout << "THIS SHOULD BE 0.7:" << toFraction(7);
 	int r = 1;
 	for (int j = 2; j <= i; j++)
 		r *= j;

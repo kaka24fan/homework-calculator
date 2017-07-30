@@ -1,25 +1,28 @@
 # Put line comments in the file like this.
-# Only full lines, so don't put comments
-# right after an expression, in the same line, please.
+# Only full lines, so don't put 
+# comments right after an expression,
+# in the same line, please.
+
+# Have fun..................................
+
 1.1 + 2
+1+0.7
 2.5 * 3!
 3! * 2.5
-0.5+1
-0.2+1
-0.7+1
-1+0.5
-1+0.2
-1+0.7
 (1+0.1*5) * (4!) + (1+2+3)
 (1 + cos 1 + cos 2!) * 100
+
 # If for some reason you want the calculator
 # to finish reading the lines early,
 # use a forward slash '/' at the beginning
 # of a line, that will be the last line read.
 # For example:
+
 1 + 2
 2 + 3
+
 // Let's finish here
+
 4 + 5
-#
+
 # 4 + 5 above will not be evaluated

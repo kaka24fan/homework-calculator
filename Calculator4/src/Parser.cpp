@@ -38,9 +38,6 @@ Tree* Parser::parse(Lexer* l) // page 251 in book
 		else if (act.getType() == Action::ActionType::REDUCE) // action is reduce p
 		{ 
 			Production p = act.getProduction();
-
-			std::cout << "Using " << p.toString() << "\n";
-
 			int s = p.getBodySize();
 			std::stack<Tree*> children; // used temp-ly to build the tree node
 			for (int i = 0; i < s; i++)
