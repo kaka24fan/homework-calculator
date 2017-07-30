@@ -20,8 +20,12 @@ int main()
 	
 	while (std::getline(input, line))
 	{
+		if (line.length() == 0)
+			continue;
 		if (line.at(0) == '#')
 			continue;
+		if (line.at(0) == '/')
+			break;
 
 		try
 		{
@@ -35,11 +39,11 @@ int main()
 
 			float result = final_eval(parseTree);
 
-			std::cout << "\n" << line << " = " << result;
+			std::cout << "\n" << line << " = " << result << "\n";
 		}
 		catch (const std::exception& e)
 		{
-
+			std::cout << e.what() << "\n";
 		}
 	}
 
@@ -60,14 +64,13 @@ int main()
 
 			float result = final_eval(parseTree);
 
-			std::cout << "\n" << line << " = " << result;
+			std::cout << "\n" << line << " = " << result << "\n";
 		}
 		catch (const std::exception& e)
 		{
-
+			std::cout << e.what() << "\n";
 		}
 	}
 
-	_getch();
 	return 0;
 }

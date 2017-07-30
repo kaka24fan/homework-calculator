@@ -13,20 +13,21 @@ Evaluation intEval(int i)
 	return Evaluation{ i, (float)i, true };
 }
 
-int factorial(int i)
-{
-	int r = 1;
-	for (int j = 2; j <= i; j++)
-		r *= j;
-	return r;
-}
-
 float toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
 {
 	float f = (float)t;
 	while (f >= 1.0)
 		f /= 10.0;
 	return f;
+}
+
+int factorial(int i)
+{
+	std::cout << "THIS SHOULD BE 0.7:" << toFraction(7);
+	int r = 1;
+	for (int j = 2; j <= i; j++)
+		r *= j;
+	return r;
 }
 
 Evaluation eval(Tree* t)
@@ -60,56 +61,79 @@ Evaluation eval(Tree* t)
 		return floatEval(farg[0]);
 
 	case Enums::GrammarSymbol::F:
-		if (children[1])
+		if (children[1]) // F + F1
+		{
+			if (arg[0].itsAnInt && arg[2].itsAnInt)
+				return intEval(iarg[0] + iarg[2]);
 			return floatEval(farg[0] + farg[2]);
-		else
+		}
+		else // F1
+		{
+			if (arg[0].itsAnInt)
+				return intEval(iarg[0]);
 			return floatEval(farg[0]);
+		}
 
 	case Enums::GrammarSymbol::F1:
-		if (children[1])
+		if (children[1]) // F1 - F2
+		{
+			if (arg[0].itsAnInt && arg[2].itsAnInt)
+				return intEval(iarg[0] - iarg[2]);
 			return floatEval(farg[0] - farg[2]);
-		else
+		}
+		else // F2
+		{
+			if (arg[0].itsAnInt)
+				return intEval(iarg[0]);
 			return floatEval(farg[0]);
+		}
 
 	case Enums::GrammarSymbol::F2:
-		if (children[1])
+		if (children[1]) // F2 * F3
+		{
+			if (arg[0].itsAnInt && arg[2].itsAnInt)
+				return intEval(iarg[0] * iarg[2]);
 			return floatEval(farg[0] * farg[2]);
-		else
+		}
+		else // F2
+		{
+			if (arg[0].itsAnInt)
+				return intEval(iarg[0]);
 			return floatEval(farg[0]);
+		}
 
 	case Enums::GrammarSymbol::F3:
-		if (children[2]) // case ( F )
-			return floatEval(farg[1]);
-		else if (children[1]) // case cos F3 | cos I3
+		if (children[1]) // case cos F3
 			return floatEval(cos(farg[1]));
-		else // case FLOAT
+		else // F4
+		{
+			if (arg[0].itsAnInt)
+				return intEval(iarg[0]);
 			return floatEval(farg[0]);
+		}
 
-	case Enums::GrammarSymbol::I:
-		if (children[1])
-			return intEval(iarg[0] + iarg[2]);
-		else
-			return intEval(iarg[0]);
-
-	case Enums::GrammarSymbol::I1:
-		if (children[1])
-			return intEval(iarg[0] - iarg[2]);
-		else
-			return intEval(iarg[0]);
-
-	case Enums::GrammarSymbol::I2:
-		if (children[1])
-			return intEval(iarg[0] * iarg[2]);
-		else
-			return intEval(iarg[0]);
-
-	case Enums::GrammarSymbol::I3:
-		if (children[2]) // case ( I )
-			return intEval(farg[1]);
-		else if (children[1]) // case I3 !
-			return intEval(factorial(iarg[0]));
-		else // case INT
-			return intEval(iarg[0]);
+	case Enums::GrammarSymbol::F4:
+		if (children[2]) // case ( F )
+		{
+			if (arg[1].itsAnInt)
+				return intEval(iarg[1]);
+			return floatEval(farg[1]);
+		}
+		else if (children[1]) // case F4 !
+		{
+			if (arg[0].itsAnInt)
+				return intEval(factorial(iarg[0]));
+			else
+			{
+				throw std::exception("Can't take factorial of a float!");
+			}
+		}
+		else // case FLOAT | INT
+		{
+			if (arg[0].itsAnInt)
+				return intEval(iarg[0]);
+			return floatEval(farg[0]);
+		}
 
 	case Enums::GrammarSymbol::FLOAT:
 		//case num.num

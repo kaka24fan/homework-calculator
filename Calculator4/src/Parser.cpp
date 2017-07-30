@@ -8,11 +8,7 @@
 
 void Parser::fail(std::string msg)
 {
-	std::cerr << "\nPARSER ERROR: " << msg << "\n";
-	throw std::exception();
-	//std::cerr << "\nPress a key to close console";
-	//_getch();
-	//exit(-69);
+	throw std::exception(("\nPARSER ERROR: " + msg).c_str());
 }
 
 Parser::Parser(std::string grammar_path)
@@ -42,6 +38,9 @@ Tree* Parser::parse(Lexer* l) // page 251 in book
 		else if (act.getType() == Action::ActionType::REDUCE) // action is reduce p
 		{ 
 			Production p = act.getProduction();
+
+			std::cout << "Using " << p.toString() << "\n";
+
 			int s = p.getBodySize();
 			std::stack<Tree*> children; // used temp-ly to build the tree node
 			for (int i = 0; i < s; i++)
