@@ -1,3 +1,6 @@
+# You will be able to specify more inputs 
+# on runtime, through the console!
+
 # Put line comments in the file like this.
 # Only full lines, so don't put 
 # comments right after an expression,

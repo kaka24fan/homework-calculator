@@ -67,7 +67,7 @@ int main()
 
 			float result = final_eval(parseTree);
 
-			std::cout << "\n" << line << " = " << result << "\n";
+			std::cout << "\n" << line << " = " << result << "\n\n";
 		}
 		catch (const std::exception& e)
 		{
