@@ -143,7 +143,7 @@ Evaluation eval(Tree* t)
 			return floatEval(farg[0]);
 		//case .num
 		else
-			return floatEval(toFraction(farg[0]));
+			return floatEval(toFraction(farg[1]));
 		
 	case Enums::GrammarSymbol::INT:
 		return intEval(iarg[0]);

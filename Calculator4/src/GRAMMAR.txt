@@ -1,7 +1,3 @@
-START E
-
-E F
-
 F F1
 F F + F1
 

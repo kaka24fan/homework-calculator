@@ -115,13 +115,7 @@
     <Text Include="src\GRAMMAR.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="src\GRAMMAR_friendly.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
     <Text Include="src\input.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="src\GRAMMAR2.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
