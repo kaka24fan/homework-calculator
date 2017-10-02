@@ -29,7 +29,7 @@ private:
 	std::map< int, std::map< Enums::GrammarSymbol, Action > > action;
 	std::map< int, std::map< Enums::GrammarSymbol, int > > go_to;
 
-	Enums::SymbolAndValue tokenToSymbol(Token* t);
+	Enums::SymbolAndValue tokenToSymbol(Token t);
 	Enums::SymbolAndValue readSymbol(Lexer* l);
 	void fail(std::string msg);
 };

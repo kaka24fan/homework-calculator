@@ -72,12 +72,12 @@ char Lexer::readInChar()
     return source[next_index++];
 }
 
-Token* Lexer::get()
+Token Lexer::get()
 {
     if (last)
     {
         last = nullptr;
-        return last;
+        return *last;
     }
     // last is null, fetch next token:
 
@@ -95,7 +95,7 @@ Token* Lexer::get()
             v = 10*v + digitVal(peek);
             peek = readInChar();
         } while(isDigit(peek));
-        return new Token(Token::NUM, v);
+        return Token(Token::NUM, v);
     }
 
     else
@@ -114,33 +114,33 @@ Token* Lexer::get()
             {
                 peek = ' '; // setting peek to whitespace makes us read in the next char
                             // in the 1st while loop in next call to get
-                return new Token(Token::COS);
+                return Token(Token::COS);
             }
             break;
         case '+':
             peek = ' ';
-            return new Token(Token::PLUS);
+            return Token(Token::PLUS);
         case '-':
             peek = ' ';
-            return new Token(Token::MINUS);
+            return Token(Token::MINUS);
         case '*':
             peek = ' ';
-            return new Token(Token::MUL);
+            return Token(Token::MUL);
         case '!':
             peek = ' ';
-            return new Token(Token::FAC);
+            return Token(Token::FAC);
         case '(':
             peek = ' ';
-            return new Token(Token::LEFTPAREN);
+            return Token(Token::LEFTPAREN);
 		case ')':
 			peek = ' ';
-			return new Token(Token::RIGHTPAREN);
+			return Token(Token::RIGHTPAREN);
 		case '.':
 			peek = ' ';
-			return new Token(Token::DOT);
+			return Token(Token::DOT);
         case '$':
             peek = ' ';
-            return new Token(Token::END);
+            return Token(Token::END);
         default:
             fail(std::string("Unrecognised symbol \'") + peek + "\'");
         }

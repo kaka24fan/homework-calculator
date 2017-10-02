@@ -21,7 +21,7 @@ class Lexer
 {
 public:
     void putback(Token t);
-    Token* get();
+    Token get();
     Lexer(std::string s);
 private:
     char readInChar();

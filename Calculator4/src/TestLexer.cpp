@@ -15,10 +15,10 @@ void testLexer()
 	std::getline(infile, input); // read in 1st line of the text file
 
 	Lexer lexer = *new Lexer(input);
-	Token* t;
-	for (t = lexer.get(); t->getName() != Token::TokenName::END; t = lexer.get())
+	Token t{Token::TokenName::END};
+	for (t = lexer.get(); t.getName() != Token::TokenName::END; t = lexer.get())
 	{
-		std::cout << t->toString() << " ";
+		std::cout << t.toString() << " ";
 	}
-	std::cout << t->toString() << " <- this last one should be (END)!\n";
+	std::cout << t.toString() << " <- this last one should be (END)!\n";
 }

@@ -86,9 +86,9 @@ void Parser::restart()
 	stateStack.push(0);
 }
 
-Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
+Enums::SymbolAndValue Parser::tokenToSymbol(Token t)
 {
-	switch (t->getName())
+	switch (t.getName())
 	{
 	case Token::TokenName::LEFTPAREN:
 		return Enums::SymbolAndValue{ Enums::GrammarSymbol::LEFTPAREN, 0, 0.0 };
@@ -109,7 +109,7 @@ Enums::SymbolAndValue Parser::tokenToSymbol(Token* t)
 	case Token::TokenName::END:
 		return Enums::SymbolAndValue{ Enums::GrammarSymbol::END, 0, 0.0 };
 	case Token::TokenName::NUM:
-		return Enums::SymbolAndValue{ Enums::GrammarSymbol::NUM, t->getVal(), 0.0 };
+		return Enums::SymbolAndValue{ Enums::GrammarSymbol::NUM, t.getVal(), 0.0 };
 	}
 }
 
