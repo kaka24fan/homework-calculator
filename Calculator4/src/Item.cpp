@@ -63,7 +63,5 @@ std::string Item::toString()
 	if (dotPos > production.getBodyCopy().size())
 		res += "[invalid item with dotPos = " + std::to_string(dotPos) + "]";
 
-	//res += "  {dotPos=" + std::to_string(dotPos) + "}";
-
 	return res;
 }

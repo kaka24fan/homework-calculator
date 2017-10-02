@@ -12,16 +12,8 @@
 class Parser
 {
 public:
-	//this enum moved to Enums.h to avoid "#include" cycle with ParseTree
-	//enum GrammarSymbol { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS, END /* , nonterminals... */ };
 	Parser(std::string grammar_path);
 	Tree* parse(Lexer* l);
-	/*struct SymbolAndValue // value only used for symbol NUM.
-	{					  // these things will be grow on the parse tree
-		Enums::GrammarSymbol symbol;
-		int ivalue;
-		float fvalue;
-	};*/
 	void restart();
 private:
 	std::stack<Tree*> treeStack;

@@ -19,7 +19,7 @@ void testParser()
 
 	Tree* parseTree = parser.parse(lexer);
 
-	// TODO: Print the parse tree
+	// TODO optional: Print the parse tree
 	float result = final_eval(parseTree);
 
 	std::cout << "\nRESULT: " << result << std::endl;
