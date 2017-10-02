@@ -91,11 +91,29 @@ Token Lexer::get()
     if (isDigit(peek)) // read a number
     {
         int v = 0;
+		int leadingZeros = 0;
+		bool readingLeadingZeros = true;
         do {
-            v = 10*v + digitVal(peek);
+			int digit = digitVal(peek);
+			if (readingLeadingZeros)
+			{
+				if (digit == 0)
+					leadingZeros++;
+				else
+					readingLeadingZeros = false;
+			}
+            v = 10*v + digit;
             peek = readInChar();
         } while(isDigit(peek));
-        return Token(Token::NUM, v);
+
+		if (leadingZeros > 15)
+		{
+			std::cerr << "Too many leading zeros (>15). Undefined behavior";
+		}
+
+		v = (v << 4) + leadingZeros; // encode the number of leading zeros in the 4 least sig. bits of the value
+
+        return Token(Token::NUM, v, leadingZeros);
     }
 
     else

@@ -18,7 +18,7 @@ namespace Enums
 		END, EPSILON, EXTENDED_START }; // END corresponds to $ sign in the book
 
 	struct SymbolAndValue // value only used for symbol NUM.
-	{					  // these things will be grow on the parse tree
+	{					  // these things will grow on the parse tree
 		Enums::GrammarSymbol symbol;
 		int ivalue;
 		float fvalue;

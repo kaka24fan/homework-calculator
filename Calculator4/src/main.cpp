@@ -52,6 +52,9 @@ int main()
 
 	while (std::getline(std::cin, line))
 	{
+		if (line.length() == 0)
+			continue;
+
 		if (line.at(0) == 'q')
 			break;
 

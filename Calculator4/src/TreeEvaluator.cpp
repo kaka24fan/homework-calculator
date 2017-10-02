@@ -13,10 +13,12 @@ Evaluation intEval(int i)
 	return Evaluation{ i, (float)i, true };
 }
 
-float toFraction(int t) // takes t and divides it by 10 until it's smaller than 1.
+float toFraction(int t, int leadingZeros) // takes t and divides it by 10 until it's smaller than 1.
 {
 	float f = (float)t;
 	while (f >= 1.0)
+		f /= 10.0;
+	for (int i = 0; i < leadingZeros; i++)
 		f /= 10.0;
 	return f;
 }
@@ -137,16 +139,16 @@ Evaluation eval(Tree* t)
 	case Enums::GrammarSymbol::FLOAT:
 		//case num.num
 		if (children[2])
-			return floatEval(farg[0] + toFraction(farg[2]));
+			return floatEval((float)(iarg[0] >> 4) + toFraction(iarg[2] >> 4, iarg[2] % (1 << 4)));
 		//case num.
 		else if (children[1]->getPayload().symbol == Enums::GrammarSymbol::DOT)
-			return floatEval(farg[0]);
+			return floatEval((float)(iarg[0] >> 4));
 		//case .num
 		else
-			return floatEval(toFraction(farg[1]));
+			return floatEval(toFraction(iarg[1] >> 4, iarg[1] % (1 << 4)));
 		
 	case Enums::GrammarSymbol::INT:
-		return intEval(iarg[0]);
+		return intEval(iarg[0] >> 4); // the last 4 bits encoded the #leading zeros
 
 	default:
 		/*

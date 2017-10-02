@@ -7,7 +7,7 @@ public:
     enum TokenName { NUM, LEFTPAREN, RIGHTPAREN, DOT, PLUS, MINUS, MUL, FAC, COS, END };
     TokenName getName() {return name;}
     int getVal() {return val;}
-    Token(TokenName n, int v) {name = n; val = v;}
+    Token(TokenName n, int v, int z) {name = n; val = v;}
     Token(TokenName n) {name = n; val = -1;}
     std::string toString();
 
